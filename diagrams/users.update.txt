@@ -1,0 +1,13 @@
+@startuml
+   Title: UsersControllers Sequence Diagram
+
+   actor User
+   participant "Web Server" as WS
+   participant "Database" as DB
+
+   User -> WS: PUT /api/users
+   WS -> DB: UserModel.update(userData)
+   DB --> WS: Updated User
+   WS -> User: 202 Updated (user)
+
+@enduml
