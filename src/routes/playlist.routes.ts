@@ -1,21 +1,24 @@
 import { Router } from 'express';
-import playlistController from '../controllers/playlist.controllers';
+import { getAll, getById, create, update, deletePlaylist, addSong } from '../controllers/playlist.controllers';
 
 const playlistRouter = Router();
 
 // Obtener todas las playlists
-playlistRouter.get('/', playlistController.getAll);
+playlistRouter.get('/', getAll);
 
 // Obtener una playlist por ID
-playlistRouter.get('/:id', playlistController.getById);
+playlistRouter.get('/:id', getById);
 
 // Crear una nueva playlist
-playlistRouter.post('/', playlistController.create);
+playlistRouter.post('/', create);
 
 // Actualizar una playlist existente
-playlistRouter.put('/:id', playlistController.update);
+playlistRouter.put('/:id', update);
 
 // Eliminar una playlist
-playlistRouter.delete('/:id', playlistController.delete);
+playlistRouter.delete('/:id', deletePlaylist);
+
+// Ruta para agregar una canción a una playlist
+playlistRouter.post('/:id/songs', addSong); 
 
 export default playlistRouter;
