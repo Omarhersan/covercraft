@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, RequestHandler, Response } from 'express';
 import PlaylistModel from '../models/playlist.models';
 import { HTTP_STATUS_CODES } from '../types/htpp-status-codes';
 import { Playlist as PlaylistType } from '../types/playlist';
@@ -72,7 +72,7 @@ export const deletePlaylist = async (req: Request, res: Response) => {
     }
 };
 
-export const addSong = async (req: Request, res: Response) => {
+export const addSong: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params; // ID de la playlist
     const songData: Song = req.body; // Asegúrate de que req.body tenga el tipo correcto
 
@@ -80,7 +80,8 @@ export const addSong = async (req: Request, res: Response) => {
         // Buscar la playlist por ID
         const playlist = await PlaylistModel.findById(id);
         if (!playlist) {
-            return res.sendStatus(HTTP_STATUS_CODES.NOT_FOUND);
+            res.sendStatus(HTTP_STATUS_CODES.NOT_FOUND);
+            return;
         }
 
         // Agregar la canción al arreglo de canciones
