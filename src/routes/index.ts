@@ -5,6 +5,16 @@ import playlistRouter from './playlist.routes';
 
 const router = Router();
 
+
+/**
+ * @swagger
+ * /:
+ *  get:
+ *   description: API home route
+ *   responses:
+ *    '200':
+ *     description: A successful response
+ */
 router.get('', (req, res) => {
     res.send('Hello World!!!');
 });
