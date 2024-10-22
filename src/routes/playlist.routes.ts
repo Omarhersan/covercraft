@@ -19,6 +19,7 @@ playlistRouter.put('/:id', update);
 playlistRouter.delete('/:id', deletePlaylist);
 
 // Ruta para agregar una canción a una playlist
-playlistRouter.post('/:id/songs', addSong); 
+//playlistRouter.post('/:id/songs', addSong); 
 
 export default playlistRouter;
+ 
