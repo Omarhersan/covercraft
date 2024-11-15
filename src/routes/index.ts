@@ -2,6 +2,7 @@ import { Router } from 'express';
 import userRoutes from './user.routes';
 import coverRouter from './cover.routes';
 import playlistRouter from './playlist.routes';
+import creationRouter from './creation.routes';
 
 const router = Router();
 
@@ -27,5 +28,8 @@ router.use('/covers', coverRouter);
 
 // Rutas para playlists
 router.use('/playlists', playlistRouter);
+
+// Rutas para crear imágenes
+router.use('/images', creationRouter);
 
 export default router;
