@@ -32,3 +32,4 @@ app.use('/api-docs', serve, setup(swaggerDocs));
 app.listen(PORT, () => {
     console.log(`App is running on port ${PORT}`);
 });
+
