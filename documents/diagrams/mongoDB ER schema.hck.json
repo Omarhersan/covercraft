@@ -1,0 +1,667 @@
+{
+    "modelName": "New Model",
+    "collections": [
+        {
+            "collectionName": "users",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "f2924a28-64df-4671-8086-d8adb0ca282a",
+                    "required": true,
+                    "primaryKey": true,
+                    "error": {},
+                    "childRelationships": [
+                        "90b899b7-68c6-459c-a964-626e71ea8ef3"
+                    ]
+                },
+                {
+                    "name": "name",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "b86cc85d-637b-4401-b4c7-e4d57c11cfdd",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "password",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "0e6fe889-8cfe-4582-a149-858ae61f939e",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "role",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "3d6fecf4-b305-4835-8d8b-f368457d3d15",
+                    "default": "user",
+                    "error": {}
+                },
+                {
+                    "name": "status",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "5c28778f-479e-4d76-91a5-a8ea71e55027",
+                    "error": {
+                        "name": false
+                    }
+                },
+                {
+                    "name": "playlists",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "error": {},
+                            "GUID": "8c3224f5-ebf8-47cb-a1c8-5fb3890148ca",
+                            "arrayItem": true,
+                            "displayName": "playlist",
+                            "childRelationships": [
+                                "be8e35cf-c4d7-4073-be3d-c70806efb177"
+                            ]
+                        }
+                    ],
+                    "additionalItems": true,
+                    "error": {},
+                    "GUID": "b10432a2-ebab-4d34-8d61-8aa1a800d33c"
+                },
+                {
+                    "name": "covers",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "error": {},
+                            "GUID": "ba4a64b9-2fa1-4743-a105-69082dc7e74b",
+                            "arrayItem": true,
+                            "displayName": "cover"
+                        }
+                    ],
+                    "additionalItems": true,
+                    "error": {
+                        "name": false
+                    },
+                    "GUID": "1bd63188-f982-47a7-89f3-12be229005ab"
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "280b250d-0ca4-479b-b35b-4a67429028d1"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "8bf3ca52-dd3a-42d2-ac5a-f3f9347a9e96",
+            "bucketId": "7f592af0-a174-4e58-9d49-72200ac686bc"
+        },
+        {
+            "collectionName": "playlists",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "playlist_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "30032f1a-3dc7-4e96-93fa-1d7ab8933e65",
+                    "primaryKey": true,
+                    "required": true,
+                    "error": {},
+                    "childRelationships": [
+                        "a3f5ea2e-3492-46c3-865d-83ce435e29d5"
+                    ]
+                },
+                {
+                    "name": "name",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "16386a60-e5dd-4121-a9ce-5168e2f05aa0",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "user_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "c07ce539-4208-4c00-bfd3-d6e671942de5",
+                    "required": true,
+                    "primaryKey": false,
+                    "error": {},
+                    "foreignCollection": "8bf3ca52-dd3a-42d2-ac5a-f3f9347a9e96",
+                    "foreignField": [
+                        "8bf3ca52-dd3a-42d2-ac5a-f3f9347a9e96",
+                        "b10432a2-ebab-4d34-8d61-8aa1a800d33c",
+                        "8c3224f5-ebf8-47cb-a1c8-5fb3890148ca"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "be8e35cf-c4d7-4073-be3d-c70806efb177"
+                },
+                {
+                    "name": "songs",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "document",
+                            "properties": [
+                                {
+                                    "name": "name",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "string",
+                                    "GUID": "86e8b27f-931a-4ab7-a5b0-afa5111eb02a",
+                                    "error": {
+                                        "name": false
+                                    }
+                                },
+                                {
+                                    "name": "artist",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "string",
+                                    "GUID": "6716db30-13b1-49fa-aa25-1e64ba5dc517",
+                                    "error": {
+                                        "name": false
+                                    }
+                                },
+                                {
+                                    "name": "album",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "string",
+                                    "GUID": "b3317a4d-6c55-4791-980f-f8a28e8dc3c5",
+                                    "error": {
+                                        "name": false
+                                    }
+                                },
+                                {
+                                    "name": "duration",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "numeric",
+                                    "error": {
+                                        "name": false
+                                    },
+                                    "GUID": "35240654-6d1e-4431-a111-b1a9eb6c9637"
+                                }
+                            ],
+                            "additionalProperties": false,
+                            "error": {},
+                            "GUID": "1245658a-015b-49d4-983c-08fafc16fe5a",
+                            "arrayItem": true,
+                            "displayName": "song"
+                        }
+                    ],
+                    "additionalItems": true,
+                    "error": {
+                        "name": false
+                    },
+                    "GUID": "a9bbc6cd-ca26-4ff4-bc24-b778d8681ffe"
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "0757218a-5f79-4382-bb70-2304969dbd14"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "545f62a5-db62-465c-a513-36b8ac55b51b",
+            "bucketId": "7f592af0-a174-4e58-9d49-72200ac686bc"
+        },
+        {
+            "collectionName": "covers",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "cover_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "5006bde8-5c8d-4415-bc0f-1eff5c86c122",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "name",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "f756df28-c02c-4732-9a39-a29ae71063b4",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "playlist_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "8aae92ed-77f8-4349-8d6c-35d2c648b3cf",
+                    "foreignCollection": "545f62a5-db62-465c-a513-36b8ac55b51b",
+                    "foreignField": [
+                        "545f62a5-db62-465c-a513-36b8ac55b51b",
+                        "30032f1a-3dc7-4e96-93fa-1d7ab8933e65"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "a3f5ea2e-3492-46c3-865d-83ce435e29d5",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "user_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "error": {
+                        "name": false
+                    },
+                    "GUID": "9290dbac-a48e-4fad-9c34-1d69fc18cad0",
+                    "foreignCollection": "8bf3ca52-dd3a-42d2-ac5a-f3f9347a9e96",
+                    "foreignField": [
+                        "8bf3ca52-dd3a-42d2-ac5a-f3f9347a9e96",
+                        "f2924a28-64df-4671-8086-d8adb0ca282a"
+                    ],
+                    "relationshipType": "Foreign Key",
+                    "parentRelationship": "90b899b7-68c6-459c-a964-626e71ea8ef3"
+                },
+                {
+                    "name": "stautus",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "97d907ba-618b-4671-b92f-5ff48333cc52",
+                    "error": {
+                        "name": false
+                    }
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "a828dfce-ee27-4652-a5a8-3fdbc3177e6a"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "6160ae36-d9d9-464e-a12b-f05b015ac3e2",
+            "bucketId": "7f592af0-a174-4e58-9d49-72200ac686bc"
+        }
+    ],
+    "buckets": [
+        {
+            "name": "Covercraft",
+            "type": "bucket",
+            "collectionIds": [
+                "8bf3ca52-dd3a-42d2-ac5a-f3f9347a9e96",
+                "545f62a5-db62-465c-a513-36b8ac55b51b",
+                "6160ae36-d9d9-464e-a12b-f05b015ac3e2"
+            ],
+            "backgroundColor": {
+                "r": 121,
+                "g": 85,
+                "b": 73,
+                "a": 1
+            },
+            "show": true,
+            "isActivated": true,
+            "GUID": "7f592af0-a174-4e58-9d49-72200ac686bc"
+        }
+    ],
+    "views": [],
+    "relationships": [
+        {
+            "name": "fk_users.playlists.[0]_to_playlists.user_id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "8bf3ca52-dd3a-42d2-ac5a-f3f9347a9e96",
+                    "b10432a2-ebab-4d34-8d61-8aa1a800d33c",
+                    "8c3224f5-ebf8-47cb-a1c8-5fb3890148ca"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "545f62a5-db62-465c-a513-36b8ac55b51b",
+                    "c07ce539-4208-4c00-bfd3-d6e671942de5"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "be8e35cf-c4d7-4073-be3d-c70806efb177",
+            "parentCollection": "8bf3ca52-dd3a-42d2-ac5a-f3f9347a9e96",
+            "childCollection": "545f62a5-db62-465c-a513-36b8ac55b51b",
+            "hackoladeStyles": {
+                "GUID": "f553e64a-e5f9-40c7-b15f-52aab5d0cd26",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1694.681773193103,
+                        "y": 895.2607009871728
+                    },
+                    {
+                        "x": 1613.181742675525,
+                        "y": 895.2607009871728
+                    },
+                    {
+                        "x": 1613.181742675525,
+                        "y": 894.760700987174
+                    },
+                    {
+                        "x": 1531.6817121579468,
+                        "y": 894.760700987174
+                    }
+                ],
+                "sides": [
+                    "left",
+                    "right"
+                ]
+            }
+        },
+        {
+            "name": "fk_playlists.playlist_id_to_covers.playlist_id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "545f62a5-db62-465c-a513-36b8ac55b51b",
+                    "30032f1a-3dc7-4e96-93fa-1d7ab8933e65"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "6160ae36-d9d9-464e-a12b-f05b015ac3e2",
+                    "8aae92ed-77f8-4349-8d6c-35d2c648b3cf"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "a3f5ea2e-3492-46c3-865d-83ce435e29d5",
+            "parentCollection": "545f62a5-db62-465c-a513-36b8ac55b51b",
+            "childCollection": "6160ae36-d9d9-464e-a12b-f05b015ac3e2",
+            "hackoladeStyles": {
+                "GUID": "0cf71fd0-a4fc-4db9-af24-27770d19bc44",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1811.3578127742435,
+                        "y": 1190.8908224873112
+                    },
+                    {
+                        "x": 1811.3578127742435,
+                        "y": 1091.825761737242
+                    },
+                    {
+                        "x": 1811.681773193103,
+                        "y": 1091.825761737242
+                    },
+                    {
+                        "x": 1811.681773193103,
+                        "y": 992.7607009871728
+                    }
+                ],
+                "sides": [
+                    "top",
+                    "bottom"
+                ]
+            }
+        },
+        {
+            "name": "fk_users.id_to_covers.user_id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "8bf3ca52-dd3a-42d2-ac5a-f3f9347a9e96",
+                    "f2924a28-64df-4671-8086-d8adb0ca282a"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "6160ae36-d9d9-464e-a12b-f05b015ac3e2",
+                    "9290dbac-a48e-4fad-9c34-1d69fc18cad0"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "1",
+            "GUID": "90b899b7-68c6-459c-a964-626e71ea8ef3",
+            "parentCollection": "8bf3ca52-dd3a-42d2-ac5a-f3f9347a9e96",
+            "childCollection": "6160ae36-d9d9-464e-a12b-f05b015ac3e2",
+            "hackoladeStyles": {
+                "GUID": "fe74e492-1842-40b8-a464-6091c49dc938",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1711.8578127742435,
+                        "y": 1252.3908224873112
+                    },
+                    {
+                        "x": 1621.769762466095,
+                        "y": 1252.3908224873112
+                    },
+                    {
+                        "x": 1621.769762466095,
+                        "y": 980.0940343205073
+                    },
+                    {
+                        "x": 1531.6817121579468,
+                        "y": 980.0940343205073
+                    }
+                ],
+                "sides": [
+                    "left",
+                    "right"
+                ]
+            }
+        }
+    ],
+    "users": [],
+    "diagramViews": [],
+    "idToNameHashTable": {
+        "7f592af0-a174-4e58-9d49-72200ac686bc": "Covercraft",
+        "8bf3ca52-dd3a-42d2-ac5a-f3f9347a9e96": "users",
+        "f2924a28-64df-4671-8086-d8adb0ca282a": "id",
+        "b86cc85d-637b-4401-b4c7-e4d57c11cfdd": "name",
+        "0e6fe889-8cfe-4582-a149-858ae61f939e": "password",
+        "3d6fecf4-b305-4835-8d8b-f368457d3d15": "role",
+        "5c28778f-479e-4d76-91a5-a8ea71e55027": "status",
+        "b10432a2-ebab-4d34-8d61-8aa1a800d33c": "playlists",
+        "1bd63188-f982-47a7-89f3-12be229005ab": "covers",
+        "545f62a5-db62-465c-a513-36b8ac55b51b": "playlists",
+        "30032f1a-3dc7-4e96-93fa-1d7ab8933e65": "playlist_id",
+        "16386a60-e5dd-4121-a9ce-5168e2f05aa0": "name",
+        "c07ce539-4208-4c00-bfd3-d6e671942de5": "user_id",
+        "be8e35cf-c4d7-4073-be3d-c70806efb177": "fk_users.playlists.[0]_to_playlists.user_id",
+        "a9bbc6cd-ca26-4ff4-bc24-b778d8681ffe": "songs",
+        "86e8b27f-931a-4ab7-a5b0-afa5111eb02a": "name",
+        "6716db30-13b1-49fa-aa25-1e64ba5dc517": "artist",
+        "b3317a4d-6c55-4791-980f-f8a28e8dc3c5": "album",
+        "35240654-6d1e-4431-a111-b1a9eb6c9637": "duration",
+        "6160ae36-d9d9-464e-a12b-f05b015ac3e2": "covers",
+        "5006bde8-5c8d-4415-bc0f-1eff5c86c122": "cover_id",
+        "8aae92ed-77f8-4349-8d6c-35d2c648b3cf": "playlist_id",
+        "a3f5ea2e-3492-46c3-865d-83ce435e29d5": "fk_playlists.playlist_id_to_covers.playlist_id",
+        "f756df28-c02c-4732-9a39-a29ae71063b4": "name",
+        "9290dbac-a48e-4fad-9c34-1d69fc18cad0": "user_id",
+        "90b899b7-68c6-459c-a964-626e71ea8ef3": "fk_users.id_to_covers.user_id",
+        "97d907ba-618b-4671-b92f-5ff48333cc52": "stautus"
+    },
+    "definitions": {
+        "type": "definitions",
+        "properties": [],
+        "GUID": "1d40f7de-9fc2-43d1-9707-cca0f2e1f966"
+    },
+    "polyglotDefinitions": {
+        "type": "polyglotDefinitions",
+        "properties": [],
+        "GUID": "233f9dd1-e03c-427c-a5d7-e62fbec5bcc7"
+    },
+    "externalDefinitions": {
+        "type": "externalDefinitions",
+        "properties": [],
+        "GUID": "2b74bd2b-88ff-4302-b18a-045fe2d02b0d"
+    },
+    "sources": [],
+    "decorativeSymbols": [],
+    "dbVersion": "v7.x",
+    "dbVendor": "MongoDB",
+    "appTarget": "MONGODB",
+    "creationTS": "2024-10-11T00:06:10.763Z",
+    "GUID": "8703dd49-df82-4dd7-b64d-1cf18e5ac9b5",
+    "isLineageEnabled": false,
+    "lastModifTS": "2024-10-11T00:22:15.374Z",
+    "persistenceSchemaVersion": "7",
+    "isCreatedByPlugin": true,
+    "pluginInformation": {
+        "pluginEngineVersion": "1.0.0"
+    },
+    "applicationInformation": {
+        "version": "7.7.11"
+    },
+    "settings": {
+        "centralPane": {
+            "dbLevel": {
+                "erd": [
+                    {
+                        "GUID": "8bf3ca52-dd3a-42d2-ac5a-f3f9347a9e96",
+                        "x": 1242.6817121579468,
+                        "y": 809.4273676538406,
+                        "width": 289,
+                        "height": 256,
+                        "color": {
+                            "hex": "#008a00"
+                        }
+                    },
+                    {
+                        "GUID": "545f62a5-db62-465c-a513-36b8ac55b51b",
+                        "x": 1694.681773193103,
+                        "y": 797.7607009871728,
+                        "width": 234,
+                        "height": 195,
+                        "color": {
+                            "hex": "#a4c400"
+                        }
+                    },
+                    {
+                        "GUID": "6160ae36-d9d9-464e-a12b-f05b015ac3e2",
+                        "x": 1711.8578127742435,
+                        "y": 1190.8908224873112,
+                        "width": 199,
+                        "height": 123,
+                        "color": {
+                            "hex": "#fe5722"
+                        }
+                    }
+                ],
+                "erdDefinitions": {
+                    "erd": [],
+                    "rootPath": [],
+                    "entities": [],
+                    "decorativeSymbols": []
+                },
+                "buckets": [
+                    {
+                        "x": 1202.6817121579468,
+                        "y": 757.7607009871728,
+                        "GUID": "7f592af0-a174-4e58-9d49-72200ac686bc"
+                    }
+                ],
+                "collapsedNodes": [],
+                "activeRelationship": "",
+                "activeRelationshipFields": {
+                    "childField": [],
+                    "parentField": []
+                },
+                "selectedCollections": [],
+                "displayColorPicker": false,
+                "graphView": {
+                    "erd": [],
+                    "buckets": [],
+                    "decorativeSymbols": [],
+                    "forceLayout": true,
+                    "defaultLinkLength": 300
+                },
+                "diagramViews": [],
+                "decorativeSymbols": [],
+                "nestedCollectionsLayout": "horizontal",
+                "options": [
+                    {
+                        "autoWidth": false,
+                        "autoHeight": false,
+                        "GUID": "8bf3ca52-dd3a-42d2-ac5a-f3f9347a9e96"
+                    }
+                ],
+                "relationshipUpdateDisabled": false
+            },
+            "collectionLevel": {},
+            "changed": false
+        },
+        "dtDiagram": {
+            "collapsedNodes": [],
+            "shouldDistributeCollections": false
+        }
+    }
+}

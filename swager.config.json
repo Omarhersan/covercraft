@@ -1,0 +1,17 @@
+{
+    "swaggerDefinition" : {
+        "openapi": "3.1.0",
+        "info": {
+            "title": "covercraft",
+            "description": "Covercraft is a project developed by Sergio Dueñas and Omar Hernandez for the Web 2 class",
+            "version": "1.0.0"
+        },
+        "servers" : [
+            {
+                "url": "http://localhost:3000"
+            }
+        ]
+
+    },
+    "apis": ["./src/routes/*.ts"]
+}
