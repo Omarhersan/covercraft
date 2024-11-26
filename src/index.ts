@@ -14,22 +14,17 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const dbUrl = process.env.DB_URL;
 
-console.log("Mongo url: ", dbUrl);
 
 app.use('/api',routes);
 const swaggerDocs = swaggerJSDoc(swaggerConfig)
 app.use('/api-docs', serve, setup(swaggerDocs));
 
-//connect(dbUrl as string).then(res => {
-//    console.log("Conectado");
-//    app.listen(PORT, () => {
-//        console.log(`App is running on port ${PORT}`);
-//    });
-//}).catch(err => {
-//    console.log("Error", err)
-//});
-
-app.listen(PORT, () => {
-    console.log(`App is running on port ${PORT}`);
+connect(dbUrl as string).then(res => {
+    console.log("Conectado");
+    app.listen(PORT, () => {
+        console.log(`App is running on port ${PORT}`);
+    });
+}).catch(err => {
+    console.log("Error", err)
 });
 

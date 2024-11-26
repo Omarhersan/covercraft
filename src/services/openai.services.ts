@@ -4,9 +4,9 @@ import { config } from "dotenv";
 config();
 
 const openai = new OpenAI({
-    organization: process.env.OPENAI_ORGANIZATION_COVERCRAFT,
+    organization: process.env.ORIGANIZATION_ID_COVERCRAFT,
     project: process.env.OPENAI_PROJECT_COVERCRAFT,
-    apiKey: process.env.OPENAI_API_KEY_COVERCRAFT
+    apiKey: process.env.OPENAI_KEY_COVERCRAFT
 });
 
 
