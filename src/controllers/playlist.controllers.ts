@@ -8,7 +8,7 @@ import { Song as Song } from '../types/song';
 export const getAll = async (req: Request, res: Response) => {
     try {
         const playlists = await PlaylistModel.find();
-        res.send(playlists);
+        res.status(HTTP_STATUS_CODES.SUCCESS).send(playlists);
     } catch (e) {
         console.error("Error fetching playlists:", e); 
         res.sendStatus(HTTP_STATUS_CODES.SERVER_ERROR);
@@ -21,7 +21,7 @@ export const getById = async (req: Request, res: Response) => {
     try {
         const playlist = await PlaylistModel.findById(id);
         if (playlist) {
-            res.send(playlist);
+            res.status(200).send(playlist);
         } else {
             res.sendStatus(HTTP_STATUS_CODES.NOT_FOUND);
         }
@@ -48,7 +48,7 @@ export const update = async (req: Request, res: Response) => {
     try {
         const updatedPlaylist = await PlaylistModel.findByIdAndUpdate(id, playlistData, { new: true });
         if (updatedPlaylist) {
-            res.send(updatedPlaylist);
+            res.status(200).send(updatedPlaylist);
         } else {
             res.sendStatus(HTTP_STATUS_CODES.NOT_FOUND);
         }
@@ -89,7 +89,7 @@ export const addSong: RequestHandler = async (req: Request, res: Response, next:
 
         // Guardar los cambios en la base de datos
         await playlist.save();
-        res.send(playlist);
+        res.status(200).send(playlist);
     } catch (e) {
         console.error('Error adding song to playlist:', e);
         res.sendStatus(HTTP_STATUS_CODES.SERVER_ERROR);
