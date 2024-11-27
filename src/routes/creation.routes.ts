@@ -4,8 +4,8 @@ import { Router } from "express";
 
 
 
-const completition = async (name: string, desciption: string, songs: Array<Object>)=>{
-    const prompt = await openai.chat.completions.create({
+const completition = async (songs:any)=>{
+    await openai.chat.completions.create({
         model: 'gpt-4o',
         messages: [
             {
@@ -17,8 +17,6 @@ const completition = async (name: string, desciption: string, songs: Array<Objec
             {
                 role: 'user',
                 content: JSON.stringify({
-                    name: name,
-                    description: desciption,
                     songs: songs
                 })
             }
@@ -62,6 +60,7 @@ const completition = async (name: string, desciption: string, songs: Array<Objec
 }
 
 const imageGeneration = async (prompt: any) => {
+
     const response = await openai.images.generate({
         prompt: `${prompt}`,
         quality: "hd",
@@ -75,12 +74,12 @@ const router = Router();
 
 
 
-router.get('', (req, res) => {
+router.post('', (req, res) => {
     // Aqui debe estar el middleware que extraiga el json de la playlist de spotify
-
-    const playlist = req.body.playlist;
+    const songs = req.body.playlist;
+  
     try{
-        imageGeneration(completition(playlist.name, playlist.description, playlist.songs)).then((response) => {
+        imageGeneration(completition(songs)).then((response) => {
             res.status(200).send(response.data[0].url);
         }
     )} catch(error){

@@ -12,9 +12,9 @@ spotifyRouter.get('/playlist', (req, res) => {
 
 spotifyRouter.get('/playlist/:playlist_id', (req, res) => {
     getPlaylistElements(req.cookies, req.params.playlist_id).then((data) => {
-        res.json(data);
-        console.log(data);
+        res.send(data);
     });
+    
 });
 
 export default spotifyRouter;

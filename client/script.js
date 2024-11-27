@@ -33,26 +33,32 @@ function loginWithSpotify() {
 const playlists = document.getElementById("playlists");
 
 
-function loadPlaylist(playlistId){
+function loadPlaylist(playlistId) {
+
   const spotifyAccessToken = document.cookie;
-  fetch(`/api/spotify/playlist/${playlistId}`, {
+  fetch(`api/spotify/playlist/${playlistId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       authorization: spotifyAccessToken,
     },
-  }).then((response) => {
-    return response.json();
-  }).then((data) => {
-    fetch(`/api/spotify/playlist/${playlistId}`, {
-      method: "GET",
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    const playlist = data.items;
+    console.log(playlist);
+    fetch("/api/images", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authorization: spotifyAccessToken,
-      }
+      },
+      body: JSON.stringify({
+        playlist: playlist,
+      })
     })
-  });
+  })
 }
+  
 
 
 
@@ -89,7 +95,3 @@ function drawPlaylist(){
     
   });
 }
-
-
-
-
