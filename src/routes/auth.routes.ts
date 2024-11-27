@@ -11,9 +11,9 @@ router.get(
 
 // Callback después de la autenticación con Google
 router.get(
-  "/api/auth/google/callback", // Corrige aquí: agrega el "/" inicial
+  "/google/callback",  // Se debe hacer coincidir con la URL del callback
   passport.authenticate("google", {
-    failureRedirect: "/login-failed", // Redirige si falla la autenticación
+    failureRedirect: "/login-failed",
   }),
   (req, res) => {
     res.redirect("/"); // Redirige a la página principal tras éxito
@@ -24,15 +24,15 @@ router.get(
 router.get(
   "/spotify",
   passport.authenticate("spotify", {
-    scope: ["user-read-private", "user-read-email"], // Permisos para Spotify
+    scope: ["user-read-private", "user-read-email"],
   })
 );
 
 // Callback después de la autenticación con Spotify
 router.get(
-  "/api/auth/spotify/callback",
+  "/spotify/callback",  // Se debe hacer coincidir con la URL del callback
   passport.authenticate("spotify", {
-    failureRedirect: "/login-failed", // Redirige si falla la autenticación
+    failureRedirect: "/login-failed",
   }),
   (req, res) => {
     res.redirect("/"); // Redirige a la página principal tras éxito
