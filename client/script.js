@@ -31,28 +31,59 @@ function loginWithSpotify() {
 }
 
 const playlists = document.getElementById("playlists");
-function drawPlaylist(){
-  fetch("localhost:3000/api/spotify/playlists")
-    .then(response => response.json())
-    .then(data => {
-      playlists.innerHTML = "";
-      data.forEach(playlist => {
-        const element = document.createElement("div");
-        element.innerHTML = `
-          <h3 id="specificPlaylist">${playlist.name}</h3>
-          <p>${playlist.description}</p>
-          <img src="${playlist.image}" alt="${playlist.name}">
-        `;
-        playlists.appendChild(element);
 
-        const specificPlaylist = document.getElementById("specificPlaylist");
-        specificPlaylist.addEventListener("click", () => {
-          window.location.href = `api/spotify/playlist/${playlist.id}`;
-        });
 
-      });
-    });
+function loadPlaylist(playlistId){
+  console.log(playlistId);
+  const spotifyAccessToken = document.cookie;
+  fetch(`/api/spotify/playlist/${playlistId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: spotifyAccessToken,
+    },
+  }).then((response) => {
+    console.log(response);
+  })
+
 }
+
+
+
+function drawPlaylist(){
+  const spotifyAccessToken = document.cookie;
+  fetch(`/api/spotify/playlist`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: spotifyAccessToken,
+    },
+  }).then((response) => {
+    return response.json();
+  }).then((data) => {
+    playlists.className = "row";
+    let cardDeck = document.createElement("div");
+    cardDeck.className = "card-deck";
+
+    data.items.forEach((playlist) => {
+      let playlistElement = document.createElement("div");
+      playlistElement.className = "card mb-4 shadow-sm";
+      playlistElement.innerHTML = `
+      <div class="card-body">
+        <h5 class="card-title">${playlist.name}</h5>
+        <p class="card-text">${playlist.description}</p>
+        <button class="btn btn-primary" onclick=loadPlaylist(${playlist.id});>Cargar playlist</button>
+      </div>
+      `;
+      cardDeck.appendChild(playlistElement);
+    });
+
+    playlists.appendChild(cardDeck);
+    
+    
+  });
+}
+
 
 
 

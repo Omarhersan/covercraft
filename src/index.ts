@@ -53,8 +53,7 @@ passport.use(
       callbackURL: "/api/auth/spotify/callback", // El callbackURL para Spotify
     },
     (accessToken, refreshToken, expires_in, profile, done) => {
-      console.log("Spotify Profile:", profile);
-      done(null, profile);
+      done(null, {profile, accessToken});
     }
   )
 );

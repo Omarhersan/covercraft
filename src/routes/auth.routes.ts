@@ -25,7 +25,7 @@ router.get(
 router.get(
   "/spotify",
   passport.authenticate("spotify", {
-    scope: ["user-read-private", "user-read-email"],
+    scope: ["user-read-private", "user-read-email", 'playlist-read-private'],
   })
 );
 
@@ -36,13 +36,18 @@ router.get(
     failureRedirect: "/login-failed",
   }),
   (req, res) => {
+
     // Asegúrate de que `req.user` es un objeto del tipo `SpotifyUser`
     const spotifyUserId = (req.user as SpotifyUser)?.id;
-
-    // Si se obtiene el `spotifyUserId`, se guarda en la cookie
+    const spotifyAccessToken = (req.user as SpotifyUser)?.accessToken;
+    res.cookie("spotify_access_token", spotifyAccessToken, {
+      secure: process.env.NODE_ENV === "production",  // Solo si usas HTTPS
+      maxAge: 30 * 24 * 3600 * 1000,  // Expira en 30 días
+      sameSite: "strict",  // Usamos "strict" en min
+    })
+    // Si se obtiene el `spotifyUserId` y `spotifyAccessToken`, se guardan en las cookies
     if (spotifyUserId) {
       res.cookie("spotify_user_id", spotifyUserId, {
-        httpOnly: true,
         secure: process.env.NODE_ENV === "production",  // Solo si usas HTTPS
         maxAge: 30 * 24 * 3600 * 1000,  // Expira en 30 días
         sameSite: "strict",  // Usamos "strict" en minúsculas
