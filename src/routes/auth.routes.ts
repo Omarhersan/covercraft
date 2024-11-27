@@ -1,5 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
+import { SpotifyUser } from "../types/spotify";  // Importar el tipo de SpotifyUser
 
 const router = Router();
 
@@ -11,7 +12,7 @@ router.get(
 
 // Callback después de la autenticación con Google
 router.get(
-  "/google/callback",  // Se debe hacer coincidir con la URL del callback
+  "/google/callback", // Se debe hacer coincidir con la URL del callback
   passport.authenticate("google", {
     failureRedirect: "/login-failed",
   }),
@@ -24,7 +25,7 @@ router.get(
 router.get(
   "/spotify",
   passport.authenticate("spotify", {
-    scope: ["user-read-private", "user-read-email"],
+    scope: ["user-read-private", "user-read-email", 'playlist-read-private'],
   })
 );
 
@@ -35,7 +36,25 @@ router.get(
     failureRedirect: "/login-failed",
   }),
   (req, res) => {
-    res.redirect("/"); // Redirige a la página principal tras éxito
+
+    // Asegúrate de que `req.user` es un objeto del tipo `SpotifyUser`
+    const spotifyUserId = (req.user as SpotifyUser)?.id;
+    const spotifyAccessToken = (req.user as SpotifyUser)?.accessToken;
+    res.cookie("spotify_access_token", spotifyAccessToken, {
+      secure: process.env.NODE_ENV === "production",  // Solo si usas HTTPS
+      maxAge: 30 * 24 * 3600 * 1000,  // Expira en 30 días
+      sameSite: "strict",  // Usamos "strict" en min
+    })
+    // Si se obtiene el `spotifyUserId` y `spotifyAccessToken`, se guardan en las cookies
+    if (spotifyUserId) {
+      res.cookie("spotify_user_id", spotifyUserId, {
+        secure: process.env.NODE_ENV === "production",  // Solo si usas HTTPS
+        maxAge: 30 * 24 * 3600 * 1000,  // Expira en 30 días
+        sameSite: "strict",  // Usamos "strict" en minúsculas
+      });
+    }
+
+    res.redirect("/"); // Redirige a la página principal después de la autenticación exitosa
   }
 );
 

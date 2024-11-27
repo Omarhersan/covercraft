@@ -1,13 +1,14 @@
-import { get } from "http";
-
-const userId = ''
-const playlistEnpoint = `https://api.spotify.com/v1/users/${userId}/playlists`;
 
 
-const getPlaylists = async (accessToken: string) => {
+const playlistElementsEndpoint = `https://api.spotify.com/v1/playlists/`;
+
+
+const getPlaylists = async (cookie: any) => {
+    const userId = cookie.spotify_user_id;
+    const playlistEnpoint = `https://api.spotify.com/v1/users/${userId}/playlists`;    
     const response = await fetch(playlistEnpoint, {
         headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${cookie.spotify_access_token}`,
         },
     });
 
@@ -21,6 +22,7 @@ const getPlaylistElements = async (accessToken: string, playlistId: string) => {
             Authorization: `Bearer ${accessToken}`,
         },
     });
+
 
     return response.json();
 }
