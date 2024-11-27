@@ -6,9 +6,18 @@ import session from "express-session";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import path from "path";
 import routes from "./routes"; // Rutas principales
+import { Server } from "socket.io";
 config();
 
+
+
+
+
 const app = express();
+
+// Middleware para servir frontend
+const frontendPath = path.join(__dirname, "../client");
+app.use(express.static(frontendPath));
 
 const PORT = process.env.PORT || 3000;
 const dbUrl = process.env.DB_URL;
@@ -49,23 +58,51 @@ app.use(passport.session());
 // Usar rutas desde `routes/index.ts`
 app.use("/api", routes);
 
-// Middleware para servir frontend
-const frontendPath = path.join(__dirname, "../client");
-app.use(express.static(frontendPath));
+
 
 // Fallback para el frontend
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
+});
+
+app.get('/chat', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'chat.html'));
 });
 
 // Conexión a la base de datos
 connect(dbUrl as string)
   .then(() => {
     console.log("Conectado a la base de datos");
-    app.listen(PORT, () => {
+    const server = app.listen(PORT, () => {
       console.log(`App is running on port ${PORT}`);
     });
+
+    const io = new Server(server);
+    io.on("connection", (socket) => {
+      socket.on("join", (data) => {
+        console.log("User connected");
+        socket.join(data.room)
+      });
+
+      socket.on('messageSent', (message) => {
+        socket.broadcast.emit('messageReceived', message);
+      });
+
+      
+
+
+
+      socket.on("disconnect", () => {
+        console.log("User disconnected");
+      });
+    });
+
+
   })
   .catch((err) => {
     console.log("Error al conectar a la base de datos:", err);
   });
+
+
+
+
