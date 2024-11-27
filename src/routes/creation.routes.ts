@@ -61,6 +61,19 @@ const completition = async (songs:any)=>{
 
 const imageGeneration = async (prompt: any) => {
 
+    let playlist = [{
+        "name": "Song 1",
+        "artist": "Artist 1"
+    },
+    {
+        "name": "Song 2",
+        "artist": "Artist 2"
+    },
+    {
+        "name": "Song 3",
+        "artist": "Artist 3"
+    }]
+
     const response = await openai.images.generate({
         prompt: `${prompt}`,
         quality: "hd",

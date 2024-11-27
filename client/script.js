@@ -33,7 +33,7 @@ function loginWithSpotify() {
 const playlists = document.getElementById("playlists");
 
 
-function loadPlaylist(playlistId) {
+async function loadPlaylist(playlistId) {
 
   const spotifyAccessToken = document.cookie;
   fetch(`api/spotify/playlist/${playlistId}`, {
@@ -45,7 +45,10 @@ function loadPlaylist(playlistId) {
   })
   .then((response) => response.json())
   .then((data) => {
-    const playlist = data.items;
+
+    
+
+    
     console.log(playlist);
     fetch("/api/images", {
       method: "POST",
