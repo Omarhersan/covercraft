@@ -11,6 +11,7 @@ function navigate(section) {
       content.innerHTML = `
         <h2>Iniciar Sesión</h2>
         <button onclick="loginWithGoogle()">Iniciar sesión con Google</button>
+        <button onclick="loginWithSpotify()">Iniciar sesión con Spotify</button>
       `;
       break;
     case "try":
@@ -23,4 +24,7 @@ function navigate(section) {
 
 function loginWithGoogle() {
   window.location.href = "/api/auth/google";
+}
+function loginWithSpotify() {
+  window.location.href = "/api/auth/spotify";
 }

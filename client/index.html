@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Basic Frontend</title>
+  <title>Covercraft</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
     <h1>Covercraft</h1>
   </header>
+  <button id="chatButton" onclick="window.location.href = '/chat';">
+    <img src="https://img.icons8.com/ios/50/000000/chat.png" alt="Chat" />
+    </button>
   <nav>
     <button onclick="navigate('home')">Inicio</button>
     <button onclick="navigate('about')">About Us</button>
@@ -21,6 +24,8 @@
   </main>
   <footer>
     <p>©Covercraft 2024.</p>
+    <!-- Botón de chat que redirige a salas.html -->
+    
   </footer>
   <script src="script.js"></script>
 </body>
