@@ -20,6 +20,25 @@ router.get(
   }
 );
 
+// Ruta para iniciar sesión con Spotify
+router.get(
+  "/spotify",
+  passport.authenticate("spotify", {
+    scope: ["user-read-private", "user-read-email"], // Permisos para Spotify
+  })
+);
+
+// Callback después de la autenticación con Spotify
+router.get(
+  "/api/auth/spotify/callback",
+  passport.authenticate("spotify", {
+    failureRedirect: "/login-failed", // Redirige si falla la autenticación
+  }),
+  (req, res) => {
+    res.redirect("/"); // Redirige a la página principal tras éxito
+  }
+);
+
 // Ruta para cerrar sesión
 router.get("/logout", (req, res) => {
   req.logout((err) => {
