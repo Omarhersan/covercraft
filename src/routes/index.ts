@@ -4,6 +4,8 @@ import authRoutes from './auth.routes';
 import coverRouter from './cover.routes';
 import playlistRouter from './playlist.routes';
 import creationRouter from './creation.routes';
+import spotifyRouter from './spotify.routes';
+
 
 const router = Router();
 
@@ -33,6 +35,9 @@ router.use('/playlists', playlistRouter);
 
 // Rutas para crear imágenes
 router.use('/images', creationRouter);
+
+// Rutas para Spotify
+router.use('/spotify', spotifyRouter);
 
 
 export default router;

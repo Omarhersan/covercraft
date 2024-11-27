@@ -59,6 +59,8 @@ passport.use(
   )
 );
 
+
+
 // Serialización y deserialización del usuario
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user: Express.User | null, done) => {
