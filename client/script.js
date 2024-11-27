@@ -34,7 +34,6 @@ const playlists = document.getElementById("playlists");
 
 
 function loadPlaylist(playlistId){
-  console.log(playlistId);
   const spotifyAccessToken = document.cookie;
   fetch(`/api/spotify/playlist/${playlistId}`, {
     method: "GET",
@@ -43,9 +42,16 @@ function loadPlaylist(playlistId){
       authorization: spotifyAccessToken,
     },
   }).then((response) => {
-    console.log(response);
-  })
-
+    return response.json();
+  }).then((data) => {
+    fetch(`/api/spotify/playlist/${playlistId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: spotifyAccessToken,
+      }
+    })
+  });
 }
 
 
@@ -72,7 +78,7 @@ function drawPlaylist(){
       <div class="card-body">
         <h5 class="card-title">${playlist.name}</h5>
         <p class="card-text">${playlist.description}</p>
-        <button class="btn btn-primary" onclick=loadPlaylist(${playlist.id});>Cargar playlist</button>
+        <button class="btn btn-primary" onclick=loadPlaylist('${playlist.id}');>Cargar playlist</button>
       </div>
       `;
       cardDeck.appendChild(playlistElement);

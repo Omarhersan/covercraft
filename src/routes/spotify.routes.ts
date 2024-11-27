@@ -12,13 +12,7 @@ spotifyRouter.get('/playlist', (req, res) => {
 
 spotifyRouter.get('/playlist/:playlist_id', (req, res) => {
     getPlaylistElements(req.cookies, req.params.playlist_id).then((data) => {
-        data.items.map((item: any) => {
-            return {
-                name: item.track.name,
-                artist: item.track.artists[0].name,
-                album: item.track.album.name,
-            };
-        });
+        res.json(data);
     });
 });
 

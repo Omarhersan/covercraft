@@ -78,25 +78,7 @@ const router = Router();
 router.get('', (req, res) => {
     // Aqui debe estar el middleware que extraiga el json de la playlist de spotify
 
-    // Mock de un JSON de una playlist
-    let playlist = {
-        name: 'My Playlist',
-        description: 'This is a playlist of my favorite songs',
-        songs: [
-            {
-                name: 'Song 1',
-                artist: 'Artist 1'
-            },
-            {
-                name: 'Song 2',
-                artist: 'Artist 2'
-            },
-            {
-                name: 'Song 3',
-                artist: 'Artist 3'
-            }
-        ]
-    }
+    const playlist = req.body.playlist;
     try{
         imageGeneration(completition(playlist.name, playlist.description, playlist.songs)).then((response) => {
             res.status(200).send(response.data[0].url);
